@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0cb6320e-9b83-4b65-883b-1ac99d2a9ce7" name="Changes" comment="1주차 개발 자료 업로드">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT_STRUCTURE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-api/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-api/src/main/java/com/lecture/auth/api/AuthApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-api/src/main/java/com/lecture/auth/api/LoginRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-api/src/main/java/com/lecture/auth/api/LoginResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-controller/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-controller/src/main/java/com/lecture/auth/controller/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-domain/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-domain/src/main/java/com/lecture/auth/domain/AuthToken.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-domain/src/main/java/com/lecture/auth/domain/AuthUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-domain/src/main/java/com/lecture/auth/domain/LoginResult.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-external-api-using-feign/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-external-api-using-feign/src/main/java/com/lecture/auth/external/api/feign/AuthUserApiFeign.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-external-api/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-external-api/src/main/java/com/lecture/auth/external/api/AuthUserApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-orchestrator/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-orchestrator/src/main/java/com/lecture/auth/orchestrator/AuthOrchestrator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-repository-using-jpa/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-repository-using-jpa/src/main/java/com/lecture/auth/repository/jpa/AuthRepositoryUsingJpa.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-repository-using-jpa/src/main/java/com/lecture/auth/repository/jpa/AuthTokenEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-repository-using-jpa/src/main/java/com/lecture/auth/repository/jpa/AuthTokenJpaRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-repository/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-repository/src/main/java/com/lecture/auth/repository/AuthRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-service/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-service/src/main/java/com/lecture/auth/service/AuthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/auth-service/src/main/java/com/lecture/auth/service/CookieService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/00-questions.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/01-introduction.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/02-service.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/03-repository-interface.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/04-orchestrator.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/05-api-interface.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/06-feign-external-api.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/07-summary.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lecture-service/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lecture-service/src/main/java/com/lecture/LectureServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lecture-service/src/main/java/com/lecture/config/ComponentScanConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lecture-service/src/main/java/com/lecture/config/JpaConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lecture-service/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-api/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-api/src/main/java/com/lecture/user/api/AuthUserResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-api/src/main/java/com/lecture/user/api/UserApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-api/src/main/java/com/lecture/user/api/UserResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-controller/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-controller/src/main/java/com/lecture/user/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-domain/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-domain/src/main/java/com/lecture/user/domain/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-orchestrator/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-orchestrator/src/main/java/com/lecture/user/orchestrator/UserOrchestrator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-repository-using-jdbc/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-repository-using-jdbc/src/main/java/com/lecture/user/repository/jdbc/UserRepositoryUsingJdbc.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-repository-using-jpa/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-repository-using-jpa/src/main/java/com/lecture/user/repository/jpa/UserEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-repository-using-jpa/src/main/java/com/lecture/user/repository/jpa/UserJpaRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-repository-using-jpa/src/main/java/com/lecture/user/repository/jpa/UserRepositoryUsingJpa.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-repository/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-repository/src/main/java/com/lecture/user/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-service/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/user-service/src/main/java/com/lecture/user/service/UserService.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Gyu-won&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/my-neighbor-dev/01_ARCHITECTURE.git&quot;,
+    &quot;accountId&quot;: &quot;f9dcbed5-76e8-4849-b7c5-3adb686b8687&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="38Cfrlyh6RwN8ZwFFqDqlsraiLT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build lecture-service.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.LectureServiceApplication.executor": "Run",
+    "com.google.cloudcode.ide_session_index": "20260119_0001",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/gyudy/dev/study/lecture-service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.LectureServiceApplication">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="lecture-service" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="lecture-service" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration name="LectureClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="lecture-service.lecture-client.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lecture.client.LectureClientApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LectureServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="lecture-service.lecture-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lecture.LectureServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0cb6320e-9b83-4b65-883b-1ac99d2a9ce7" name="Changes" comment="" />
+      <created>1768308674502</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768308674502</updated>
+      <workItem from="1768308675658" duration="5901000" />
+      <workItem from="1768315330998" duration="11108000" />
+      <workItem from="1768355454840" duration="69000" />
+      <workItem from="1768383920917" duration="8985000" />
+      <workItem from="1768808956935" duration="509000" />
+    </task>
+    <task id="LOCAL-00001" summary="1주차 개발 자료 업로드">
+      <option name="closed" value="true" />
+      <created>1768325340596</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1768325340596</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1주차 개발 자료 업로드" />
+    <option name="LAST_COMMIT_MESSAGE" value="1주차 개발 자료 업로드" />
+  </component>
+</project>

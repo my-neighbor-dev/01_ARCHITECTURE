@@ -6,7 +6,8 @@ plugins {
 
 dependencies {
     implementation(project(":user:user-controller"))
-    implementation(project(":user:user-repository-using-jpa"))
+//    implementation(project(":user:user-repository-using-jpa"))
+    implementation(project(":user:user-repository-using-jdbc"))
     implementation(project(":auth:auth-controller"))
     implementation(project(":auth:auth-repository-using-jpa"))
     implementation(project(":auth:auth-external-api-using-feign"))
