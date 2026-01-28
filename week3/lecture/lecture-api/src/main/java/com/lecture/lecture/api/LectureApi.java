@@ -1,6 +1,8 @@
 package com.lecture.lecture.api;
 
+import com.lecture.authorization.common.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -54,6 +56,7 @@ public interface LectureApi {
             description = "강의 생성 요청",
             required = true
         )
-        @RequestBody CreateLectureRequest request
+        @RequestBody CreateLectureRequest request,
+        @Parameter(hidden = true) UserInfo userInfo
     );
 }

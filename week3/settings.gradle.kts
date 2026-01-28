@@ -1,4 +1,4 @@
-rootProject.name = "lecture-service"
+rootProject.name = "lecture-service-root"
 
 include("lecture-service")
 

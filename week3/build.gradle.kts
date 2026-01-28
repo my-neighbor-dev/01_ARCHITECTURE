@@ -12,7 +12,9 @@ allprojects {
     }
 }
 
-subprojects {
+configure(subprojects.filter { it.name != "lecture-service" }) {
+    group = ""
+    
     apply(plugin = "java")
     apply(plugin = "io.spring.dependency-management")
     

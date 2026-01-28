@@ -4,6 +4,40 @@ plugins {
     java
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.2.0")
+    }
+}
+
+dependencies {
+    compileOnly("org.projectlombok:lombok:1.18.30")
+    annotationProcessor("org.projectlombok:lombok:1.18.30")
+}
+
+tasks.jar {
+    enabled = false
+}
+
+tasks.bootJar {
+    enabled = true
+    archiveClassifier.set("boot")
+}
+
+// compileJava가 jar에 의존하지 않도록 설정 (순환 의존성 해결)
+afterEvaluate {
+    val compileJavaTask = tasks.named("compileJava").get()
+    val jarTask = tasks.findByName("jar")
+    if (jarTask != null) {
+        compileJavaTask.setDependsOn(compileJavaTask.dependsOn.filter { it != jarTask })
+    }
+}
+
 dependencies {
     // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -34,10 +68,14 @@ dependencies {
     // Lecture 모듈 (week3)
     implementation(project(":lecture:lecture-controller"))
     implementation(project(":lecture:lecture-repository-using-jpa"))
+    implementation(project(":lecture:lecture-service"))
+    implementation(project(":lecture:lecture-orchestrator"))
     
     // Group 모듈 (week3)
     implementation(project(":group:group-controller"))
     implementation(project(":group:group-repository-using-jpa"))
+    implementation(project(":group:group-service"))
+    implementation(project(":group:group-orchestrator"))
 
     // Feign Client
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0")
