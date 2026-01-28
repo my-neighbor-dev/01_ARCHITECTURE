@@ -1,9 +1,8 @@
 # Gradle
 .gradle/
 build/
+**/build/
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
 
 # IntelliJ IDEA
 .idea/
@@ -19,8 +18,7 @@ out/
 .project
 .settings/
 bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+**/bin/
 
 # VS Code
 .vscode/
