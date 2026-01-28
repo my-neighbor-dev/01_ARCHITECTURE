@@ -2,6 +2,7 @@ package com.lecture.auth.controller;
 
 import com.lecture.auth.api.AuthApi;
 import com.lecture.auth.api.LoginRequest;
+import com.lecture.auth.api.LoginResponse;
 import com.lecture.auth.infrastructure.DeviceInfo;
 import com.lecture.auth.orchestrator.AuthOrchestrator;
 import com.lecture.auth.orchestrator.LoginResultWithCookies;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
  * week2 개선:
  * - 쿠키를 Response에 설정
  * - DeviceInfo 파라미터 추가 (ArgumentResolver로 주입)
- * - LoginResponse 제거 (쿠키만으로 충분)
+ * 
+ * week3 개선:
+ * - LoginResponse 반환 (Bearer 토큰 인증을 위해 Access Token 포함)
  */
 @RestController
 @RequiredArgsConstructor
@@ -29,13 +32,17 @@ public class AuthController implements AuthApi {
     private final AuthOrchestrator authOrchestrator;
     
     @Override
-    public void login(LoginRequest request, DeviceInfo deviceInfo, HttpServletResponse response) {
+    public LoginResponse login(LoginRequest request, DeviceInfo deviceInfo, HttpServletResponse response) {
         LoginResultWithCookies result = authOrchestrator.login(request, deviceInfo);
         
         // 쿠키를 Response에 추가
         response.addCookie(result.getAccessTokenCookie());
         response.addCookie(result.getRefreshTokenCookie());
         
-        // Response Body는 비움 (쿠키만으로 충분)
+        // Response Body에 Access Token과 Refresh Token 포함 (Swagger에서 Bearer 토큰으로 사용)
+        return new LoginResponse(
+            result.getAccessToken().getToken(),
+            result.getRefreshToken().getToken()
+        );
     }
 }

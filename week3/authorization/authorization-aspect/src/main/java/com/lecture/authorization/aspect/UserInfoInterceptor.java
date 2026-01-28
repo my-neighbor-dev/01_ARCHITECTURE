@@ -1,6 +1,7 @@
 package com.lecture.authorization.aspect;
 
 import com.lecture.authorization.common.UserInfo;
+import com.lecture.auth.repository.AuthRepository;
 import com.lecture.group.service.UserGroupMappingService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,16 +14,16 @@ import java.util.Optional;
 /**
  * UserInfoInterceptor
  * 
- * 요청이 들어올 때 UserInfo를 생성하여 Request에 저장합니다.
+ * 요청이 들어올 때 Bearer 토큰에서 사용자 정보를 추출하여 UserInfo를 생성하고 Request에 저장합니다.
  * 
- * 실제 프로젝트에서는 SecurityContext나 JWT 토큰에서 사용자 정보를 가져와야 하지만,
- * 여기서는 간단하게 Header에서 userId를 가져오고, UserGroupMapping에서 groupId를 조회합니다.
+ * Bearer 토큰이 없으면 X-User-Id 헤더를 사용합니다 (테스트용).
  */
 @Component
 @RequiredArgsConstructor
 public class UserInfoInterceptor implements HandlerInterceptor {
     
     private final UserGroupMappingService userGroupMappingService;
+    private final AuthRepository authRepository;
     
     @Override
     public boolean preHandle(
@@ -30,9 +31,8 @@ public class UserInfoInterceptor implements HandlerInterceptor {
         HttpServletResponse response,
         Object handler)
     {
-        // Header에서 사용자 정보 가져오기 (실제로는 SecurityContext나 JWT에서 가져와야 함)
-        String userIdHeader = request.getHeader("X-User-Id");
-        Long userId = userIdHeader != null ? Long.parseLong(userIdHeader) : 1L; // 기본값
+        Long userId = extractUserIdFromBearerToken(request)
+            .orElseGet(() -> extractUserIdFromHeader(request));
         
         // UserGroupMapping에서 groupId 조회
         Long groupId = userGroupMappingService.findByUserId(userId)
@@ -43,5 +43,26 @@ public class UserInfoInterceptor implements HandlerInterceptor {
         request.setAttribute(UserInfoArgumentResolver.USER_INFO_ATTRIBUTE_NAME, userInfo);
         
         return true;
+    }
+    
+    /**
+     * Authorization 헤더에서 Bearer 토큰을 추출하고 검증하여 userId를 반환합니다.
+     */
+    private Optional<Long> extractUserIdFromBearerToken(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            return Optional.empty();
+        }
+        
+        String token = authorizationHeader.substring(7); // "Bearer " 제거
+        return authRepository.findUserIdByToken(token);
+    }
+    
+    /**
+     * X-User-Id 헤더에서 userId를 추출합니다 (테스트용).
+     */
+    private Long extractUserIdFromHeader(HttpServletRequest request) {
+        String userIdHeader = request.getHeader("X-User-Id");
+        return userIdHeader != null ? Long.parseLong(userIdHeader) : 1L; // 기본값
     }
 }

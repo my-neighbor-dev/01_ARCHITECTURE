@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,11 @@ public interface LectureApi {
     
     @Operation(
         summary = "강의 조회",
-        description = "강의 ID를 통해 강의 정보를 조회합니다. 자신이 만든 강의만 조회 가능합니다."
+        description = "강의 ID를 통해 강의 정보를 조회합니다. 자신이 만든 강의만 조회 가능합니다.",
+        security = {
+            @SecurityRequirement(name = "bearerAuth"),
+            @SecurityRequirement(name = "userIdHeader")
+        }
     )
     @ApiResponses(value = {
         @ApiResponse(

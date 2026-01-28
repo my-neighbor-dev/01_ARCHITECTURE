@@ -59,7 +59,12 @@ public class AuthOrchestrator {
             loginResult.getRefreshToken().getToken()
         );
         
-        // 6. 쿠키만 반환 (Response Body는 비움)
-        return new LoginResultWithCookies(accessTokenCookie, refreshTokenCookie);
+        // 6. 쿠키와 토큰 정보 반환 (Response Body에 토큰 포함)
+        return new LoginResultWithCookies(
+            accessTokenCookie,
+            refreshTokenCookie,
+            loginResult.getAccessToken(),
+            loginResult.getRefreshToken()
+        );
     }
 }

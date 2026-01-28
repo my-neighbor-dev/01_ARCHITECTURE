@@ -35,8 +35,10 @@ public class AuthService {
             throw new RuntimeException("Invalid password");
         }
         
-        // 2. Access Token 생성 (저장하지 않음 - stateless)
+        // 2. Access Token 생성 및 저장 (Bearer 토큰 인증을 위해 저장)
         AuthToken accessToken = generateAccessToken(authUser);
+        authRepository.deleteAccessTokenByUserId(authUser.getId());
+        authRepository.saveAccessToken(accessToken);
         
         // 3. Refresh Token 생성 및 저장 (도메인 객체를 직접 전달)
         AuthToken refreshToken = generateRefreshToken(authUser);

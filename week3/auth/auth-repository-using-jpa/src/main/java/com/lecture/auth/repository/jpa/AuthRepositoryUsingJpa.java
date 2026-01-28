@@ -50,7 +50,6 @@ public class AuthRepositoryUsingJpa implements AuthRepository {
     @Override
     public Optional<Long> findUserIdByToken(String token) {
         return authTokenJpaRepository.findByToken(token)
-            .map(AuthTokenEntity::getUserId)
             .filter(entity -> entity.getExpiresAt() > System.currentTimeMillis())
             .map(AuthTokenEntity::getUserId);
     }
