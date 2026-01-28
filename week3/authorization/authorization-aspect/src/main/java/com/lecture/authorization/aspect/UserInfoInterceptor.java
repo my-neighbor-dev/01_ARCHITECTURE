@@ -32,7 +32,10 @@ public class UserInfoInterceptor implements HandlerInterceptor {
         Object handler)
     {
         Long userId = extractUserIdFromBearerToken(request)
-            .orElseGet(() -> extractUserIdFromHeader(request));
+            .orElseGet(() -> extractUserIdFromHeader(request)
+                .orElseThrow(() -> new IllegalStateException(
+                    "User ID not found. Please provide either 'Authorization: Bearer <token>' header or 'X-User-Id' header."
+                )));
         
         // UserGroupMapping에서 groupId 조회
         Long groupId = userGroupMappingService.findByUserId(userId)
@@ -61,8 +64,15 @@ public class UserInfoInterceptor implements HandlerInterceptor {
     /**
      * X-User-Id 헤더에서 userId를 추출합니다 (테스트용).
      */
-    private Long extractUserIdFromHeader(HttpServletRequest request) {
+    private Optional<Long> extractUserIdFromHeader(HttpServletRequest request) {
         String userIdHeader = request.getHeader("X-User-Id");
-        return userIdHeader != null ? Long.parseLong(userIdHeader) : 1L; // 기본값
+        if (userIdHeader == null || userIdHeader.trim().isEmpty()) {
+            return Optional.empty();
+        }
+        try {
+            return Optional.of(Long.parseLong(userIdHeader));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("X-User-Id header must be a valid number: " + userIdHeader);
+        }
     }
 }

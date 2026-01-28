@@ -45,14 +45,22 @@ public interface LectureApi {
     LectureResponse getLecture(@PathVariable("lectureId") Long lectureId);
     
     @Operation(
-        summary = "강의 생성 (테스트용)",
-        description = "테스트용 강의를 생성합니다."
+        summary = "강의 생성",
+        description = "새로운 강의를 생성합니다. X-User-Id 헤더 또는 Bearer 토큰을 통해 사용자 정보를 전달해야 합니다.",
+        security = {
+            @SecurityRequirement(name = "bearerAuth"),
+            @SecurityRequirement(name = "userIdHeader")
+        }
     )
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
             description = "강의 생성 성공",
             content = @Content(schema = @Schema(implementation = LectureResponse.class))
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "사용자 정보가 없음 (X-User-Id 헤더 또는 Bearer 토큰 필요)"
         )
     })
     @PostMapping

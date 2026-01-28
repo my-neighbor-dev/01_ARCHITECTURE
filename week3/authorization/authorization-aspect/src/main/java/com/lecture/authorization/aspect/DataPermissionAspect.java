@@ -1,6 +1,9 @@
 package com.lecture.authorization.aspect;
 
 import com.lecture.authorization.annotation.CheckDataPermission;
+import com.lecture.authorization.annotation.CheckGroupPermission;
+import com.lecture.authorization.annotation.CheckLecturePermission;
+import com.lecture.authorization.annotation.CheckUserPermission;
 import com.lecture.authorization.annotation.PermissionId;
 import com.lecture.authorization.common.DataPermissionCheckType;
 import com.lecture.authorization.common.DomainFinder;
@@ -23,8 +26,8 @@ import java.lang.reflect.Parameter;
 /**
  * 데이터 소유권 검증을 수행하는 Aspect
  * 
- * @CheckDataPermission Annotation이 붙은 메서드를 가로채서
- * 데이터 소유권 검증을 수행합니다.
+ * @CheckDataPermission 또는 이를 메타 어노테이션으로 가진 어노테이션(@CheckUserPermission, @CheckLecturePermission, @CheckGroupPermission)이
+ * 붙은 메서드를 가로채서 데이터 소유권 검증을 수행합니다.
  */
 @Aspect
 @Component
@@ -36,7 +39,10 @@ public class DataPermissionAspect {
         this.applicationContext = applicationContext;
     }
     
-    @Around("@annotation(com.lecture.authorization.annotation.CheckDataPermission)")
+    @Around("@annotation(com.lecture.authorization.annotation.CheckDataPermission) || " +
+            "@annotation(com.lecture.authorization.annotation.CheckUserPermission) || " +
+            "@annotation(com.lecture.authorization.annotation.CheckLecturePermission) || " +
+            "@annotation(com.lecture.authorization.annotation.CheckGroupPermission)")
     public Object checkPermission(ProceedingJoinPoint joinPoint) throws Throwable {
         // 1. 메서드 정보 추출
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();

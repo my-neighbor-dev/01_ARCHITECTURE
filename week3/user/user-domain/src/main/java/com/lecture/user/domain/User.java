@@ -1,9 +1,10 @@
 package com.lecture.user.domain;
 
+import com.lecture.authorization.common.ResourceOwnership;
 import lombok.Getter;
 
 @Getter
-public class User {
+public class User implements ResourceOwnership {
     private Long id;
     private String email;
     private String name;
@@ -16,5 +17,10 @@ public class User {
         this.name = name;
         this.password = password;
         this.phoneNumber = phoneNumber;
+    }
+    
+    @Override
+    public Long getOwnershipId() {
+        return id;  // 사용자 ID가 소유권 ID
     }
 }

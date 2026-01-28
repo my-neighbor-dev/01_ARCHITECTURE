@@ -4,4 +4,6 @@ dependencies {
     implementation(project(":user:user-domain"))
     
     implementation("org.springframework:spring-context")
+    implementation(project(":authorization:authorization-common"))
+
 }

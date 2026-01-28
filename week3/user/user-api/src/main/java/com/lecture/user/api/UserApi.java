@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +30,23 @@ public interface UserApi {
     
     @Operation(
         summary = "유저 정보 조회",
-        description = "유저 ID를 통해 유저 정보를 조회합니다."
+        description = "유저 ID를 통해 유저 정보를 조회합니다. 자신의 정보만 조회 가능합니다.",
+        security = {
+            @SecurityRequirement(name = "bearerAuth"),
+            @SecurityRequirement(name = "userIdHeader")
+        }
     )
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "유저 정보 조회 성공",
+            content = @Content(schema = @Schema(implementation = UserResponse.class))
+        ),
+        @ApiResponse(
+            responseCode = "403",
+            description = "접근 권한 없음 (다른 사용자의 정보)"
+        )
+    })
     @GetMapping("/{id}")
     UserResponse getUserById(@PathVariable("id") Long id);
     

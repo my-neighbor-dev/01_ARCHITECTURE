@@ -27,7 +27,25 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(deviceIdInterceptor);
-        registry.addInterceptor(userInfoInterceptor);
+        registry.addInterceptor(userInfoInterceptor)
+            .excludePathPatterns(
+                // Swagger UI 및 문서
+                "/swagger-ui/**",
+                "/swagger-ui.html",
+                "/api-docs/**",
+                // H2 콘솔
+                "/h2-console/**",
+                // 에러 페이지 및 정적 리소스
+                "/error",
+                "/favicon.ico",
+                // 인증이 필요 없는 API
+                "/api/users",  // POST - 유저 생성
+                "/api/users/by-email/**",  // GET - 이메일로 유저 조회 (인증용)
+                "/api/groups",  // POST - 그룹 생성
+                "/api/groups/*/users",  // POST - 유저를 그룹에 추가
+                "/api/lectures",  // POST - 강의 생성
+                "/api/auth/**"  // 인증 관련 API (로그인 등)
+            );
     }
     
     @Override

@@ -1,1 +1,3 @@
-// 도메인 모델만 포함하므로 의존성 없음
+dependencies {
+    implementation(project(":authorization:authorization-common"))
+}

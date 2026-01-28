@@ -1,5 +1,7 @@
 package com.lecture.user.controller;
 
+import com.lecture.authorization.annotation.CheckUserPermission;
+import com.lecture.authorization.annotation.PermissionId;
 import com.lecture.user.api.AuthUserResponse;
 import com.lecture.user.api.CreateUserRequest;
 import com.lecture.user.api.UserApi;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
  * 2. Controller에 복잡하게 있던 Swagger 관련 코드들이 분리됨
  * 3. Controller에서는 로깅, 권한 체크 등의 로직만 수행
  * 4. Orchestrator를 통해 비즈니스 로직 처리
+ * 
+ * @CheckUserPermission Annotation이 붙은 메서드는
+ * Aspect에 의해 자동으로 소유권 검증이 수행됩니다.
  */
 @RestController
 @RequiredArgsConstructor
@@ -29,7 +34,10 @@ public class UserController implements UserApi {
     private final UserOrchestrator userOrchestrator;
     
     @Override
-    public UserResponse getUserById(Long id) {
+    @CheckUserPermission
+    public UserResponse getUserById(@PermissionId Long id) {
+        // Aspect가 자동으로 소유권 검증을 수행합니다.
+        // 자신의 정보만 조회 가능합니다.
         return userOrchestrator.getUserById(id);
     }
     

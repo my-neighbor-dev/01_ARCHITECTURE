@@ -21,8 +21,11 @@ public enum DataPermissionCheckType {
     GROUP {
         @Override
         public void validate(ResourceOwnership resource, UserInfo user) {
-            if (resource.getOwnershipId() == null || user.getGroupId() == null) {
-                throw new IllegalStateException("Resource ownership ID or user group ID is null");
+            if (resource.getOwnershipId() == null) {
+                throw new IllegalStateException("Resource ownership ID is null");
+            }
+            if (user.getGroupId() == null) {
+                throw new AccessDeniedException("Access Denied: User does not belong to any group");
             }
             if (!resource.getOwnershipId().equals(user.getGroupId())) {
                 throw new AccessDeniedException("Access Denied: User does not belong to this group");

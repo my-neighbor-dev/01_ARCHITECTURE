@@ -16,6 +16,9 @@ public class GroupOrchestrator {
     
     public GroupResponse getGroup(Long groupId) {
         Group group = groupService.findById(groupId);
+        if (group == null) {
+            throw new IllegalArgumentException("Group not found with id: " + groupId);
+        }
         return new GroupResponse(
             group.getId(),
             group.getName(),
