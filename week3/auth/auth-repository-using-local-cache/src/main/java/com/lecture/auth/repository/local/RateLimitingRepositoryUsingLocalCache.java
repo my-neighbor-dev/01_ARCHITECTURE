@@ -13,21 +13,22 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Repository
 public class RateLimitingRepositoryUsingLocalCache implements RateLimitingRepository {
-    
+
+    private static final long MILLIS_PER_SECOND = 1000L;
     private final ConcurrentHashMap<String, CacheEntry> cache = new ConcurrentHashMap<>();
-    
+
     @Override
     public Long incrementAndGet(String key, long ttlSeconds) {
         CacheEntry entry = cache.compute(key, (k, v) -> {
             if (v == null || v.isExpired()) {
-                return new CacheEntry(1L, System.currentTimeMillis() + (ttlSeconds * 1000));
+                return new CacheEntry(1L, System.currentTimeMillis() + (ttlSeconds * MILLIS_PER_SECOND));
             }
             return new CacheEntry(v.count + 1, v.expiresAt);
         });
-        
+
         return entry.count;
     }
-    
+
     @Override
     public void delete(String key) {
         cache.remove(key);
@@ -39,12 +40,12 @@ public class RateLimitingRepositoryUsingLocalCache implements RateLimitingReposi
     private static class CacheEntry {
         final Long count;
         final long expiresAt;
-        
+
         CacheEntry(Long count, long expiresAt) {
             this.count = count;
             this.expiresAt = expiresAt;
         }
-        
+
         boolean isExpired() {
             return System.currentTimeMillis() > expiresAt;
         }

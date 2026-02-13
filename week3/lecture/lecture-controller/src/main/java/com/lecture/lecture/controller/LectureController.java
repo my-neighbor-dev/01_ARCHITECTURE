@@ -25,15 +25,11 @@ public class LectureController implements LectureApi {
     @Override
     @CheckLecturePermission
     public LectureResponse getLecture(@PermissionId Long lectureId) {
-        // Aspect가 자동으로 소유권 검증을 수행합니다.
-        // 자신이 만든 강의만 조회 가능합니다.
         return lectureOrchestrator.getLecture(lectureId);
     }
     
     @Override
     public LectureResponse createLecture(CreateLectureRequest request, UserInfo userInfo) {
-        // 강의 생성 시 현재 사용자 ID를 createdBy로 설정
-        // UserInfo는 ArgumentResolver를 통해 자동 주입됩니다
         return lectureOrchestrator.createLecture(
             request.getTitle(),
             request.getDescription(),

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<ruleset name="lecture-service-rules"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>
+        detekt.yml 룰셋을 Java/PMD로 변환한 규칙.
+        Kotlin 전용 규칙(UseDataClass, ExplicitItLambdaParameter, UnnecessaryLet 등)은 Java에 해당 개념이 없어 제외.
+    </description>
+
+    <!-- ================================================================== -->
+    <!-- style (detekt) → bestpractices / codestyle (PMD)                   -->
+    <!-- ================================================================== -->
+
+    <!-- detekt: UnusedPrivateProperty -->
+    <rule ref="category/java/bestpractices.xml/UnusedPrivateField"/>
+
+    <!-- detekt: UnusedParameter (active: false) → 동일하게 미포함 -->
+
+    <!-- 미사용 코드 탐지 (style 취지 확장) -->
+    <rule ref="category/java/bestpractices.xml/UnusedLocalVariable"/>
+    <rule ref="category/java/bestpractices.xml/UnusedPrivateMethod"/>
+    <rule ref="category/java/bestpractices.xml/UnusedAssignment"/>
+
+    <!-- detekt: WildcardImport → 불필요한 import 탐지 -->
+    <rule ref="category/java/codestyle.xml/UnnecessaryImport"/>
+
+    <!-- ================================================================== -->
+    <!-- potential-bugs (detekt) → errorprone (PMD)                         -->
+    <!-- Kotlin 전용(CastNullableToNonNullableType, DoubleMutabilityForCollection)은 제외 -->
+    <!-- ================================================================== -->
+
+    <!-- detekt: IgnoredReturnValue 취지 반영 -->
+    <rule ref="category/java/errorprone.xml/EmptyCatchBlock">
+        <properties>
+            <property name="allowCommentedBlocks" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/errorprone.xml/EmptyIfStmt"/>
+    <rule ref="category/java/errorprone.xml/EmptyWhileStmt"/>
+    <rule ref="category/java/errorprone.xml/EqualsNull"/>
+    <rule ref="category/java/errorprone.xml/ReturnFromFinallyBlock"/>
+    <rule ref="category/java/errorprone.xml/ClassCastExceptionWithToArray"/>
+    <rule ref="category/java/errorprone.xml/DontUseFloatTypeForLoopIndices"/>
+    <rule ref="category/java/errorprone.xml/AvoidBranchingStatementAsLastInLoop"/>
+
+    <!-- ================================================================== -->
+    <!-- complexity (detekt) → design (PMD)                                 -->
+    <!-- ================================================================== -->
+
+    <!-- detekt: LongParameterList (functionThreshold: 7, constructorThreshold: 50) -->
+    <rule ref="category/java/design.xml/ExcessiveParameterList">
+        <properties>
+            <property name="minimum" value="7"/>
+        </properties>
+    </rule>
+
+    <!-- detekt: LongMethod (threshold: 80) -->
+    <rule ref="category/java/design.xml/ExcessiveMethodLength">
+        <properties>
+            <property name="minimum" value="80"/>
+        </properties>
+    </rule>
+
+    <!-- detekt: CyclomaticComplexMethod (threshold: 20) -->
+    <rule ref="category/java/design.xml/CyclomaticComplexity">
+        <properties>
+            <property name="methodReportLevel" value="20"/>
+            <property name="classReportLevel" value="80"/>
+        </properties>
+    </rule>
+
+    <!-- detekt: TooManyFunctions (thresholdInClasses: 20, thresholdInFiles: 20) -->
+    <rule ref="category/java/design.xml/TooManyMethods">
+        <properties>
+            <property name="maxmethods" value="20"/>
+        </properties>
+    </rule>
+
+</ruleset>

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+echo "Running pre-commit checks..."
+
+# Move to backend directory
+cd backend
+
+# Run the centralized devCheck task (includes ktlint, detekt, test) with --offline to avoid credential issues
+./gradlew devCheck --offline
+
+# Capture the exit code
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+    echo "❌ Pre-commit checks failed. Commit aborted."
+    echo "💡 If the failure is due to missing dependencies, try running './gradlew devCheck' manually to download them."
+    exit 1
+fi
+
+echo "✅ Pre-commit checks passed."
+exit 0

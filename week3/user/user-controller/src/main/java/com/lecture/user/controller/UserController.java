@@ -36,8 +36,6 @@ public class UserController implements UserApi {
     @Override
     @CheckUserPermission
     public UserResponse getUserById(@PermissionId Long id) {
-        // Aspect가 자동으로 소유권 검증을 수행합니다.
-        // 자신의 정보만 조회 가능합니다.
         return userOrchestrator.getUserById(id);
     }
     

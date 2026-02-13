@@ -1,0 +1,107 @@
+# ktlint와 충돌하지 않도록 설정
+style:
+  MaxLineLength:
+    active: true
+    maxLineLength: 180
+    excludePackageStatements: true
+    excludeImportStatements: true
+  # ktlint가 처리하지 않는 룰만 활성화
+  WildcardImport:
+    active: true
+
+  MagicNumber:
+    active: true
+    ignoreNumbers:
+      - '-1'
+      - '0'
+      - '1'
+      - '2'
+    ignoreHashCodeFunction: true
+    ignorePropertyDeclaration: false
+    ignoreAnnotation: true
+  UnusedPrivateProperty:
+    active: true
+  UnusedParameter:
+    active: false  # 향후 사용 예정인 파라미터가 많아 비활성화
+  # immutable data holder는 data class 사용 권장
+  UseDataClass:
+    active: true
+  # lambda에서 it 대신 명시적 파라미터명 사용 권장
+  ExplicitItLambdaParameter:
+    active: true
+  # TODO/FIXME 등 방치된 주석 탐지
+  ForbiddenComment:
+    active: true
+    comments:
+      - reason: 'TODO should be addressed before merge'
+        value: 'TODO:'
+      - reason: 'FIXME should be addressed before merge'
+        value: 'FIXME:'
+  # 불필요한 .let 호출 탐지
+  UnnecessaryLet:
+    active: true
+  # non-null 값에 ?.let 등 쓸모없는 호출 탐지
+  UselessCallOnNotNull:
+    active: true
+  # final class에서 protected 사용 탐지
+  ProtectedMemberInFinalClass:
+    active: true
+
+# 잠재적 버그 방지
+potential-bugs:
+  # nullable → non-null 캐스트 탐지 (NPE 방지)
+  CastNullableToNonNullableType:
+    active: true
+  # var + mutable collection 함께 사용 금지 (불변성 강화)
+  DoubleMutabilityForCollection:
+    active: true
+  # 반환값 무시 탐지
+  IgnoredReturnValue:
+    active: true
+
+performance:
+  # SpreadOperator는 Kotlin의 vararg 전달에 필수적이므로 비활성화
+  SpreadOperator:
+    active: false
+
+complexity:
+  active: true
+  LongParameterList:
+    functionThreshold: 7
+    constructorThreshold: 50
+    ignoreDataClasses: true
+  LongMethod:
+    threshold: 80
+  CyclomaticComplexMethod:
+    threshold: 20
+  TooManyFunctions:
+    thresholdInFiles: 20
+    thresholdInClasses: 20
+  # Guard Clause 패턴 허용: Early Return은 가독성을 높이는 권장 패턴
+  # ReturnCount는 detekt 1.x에서만 존재하므로 주석 처리
+  # ReturnCount:
+  #   max: 5
+  #   excludeReturnFromLambda: true
+  #   excludeGuardClauses: true
+
+# @Suppress 사용 정책
+# 코드 품질 우회를 방지하고, 정당한 사용만 허용
+# 상세 정책: docs/policies/SUPPRESS_ANNOTATION_POLICY.md
+# 현재 @Suppress 사용 현황은 코드 리뷰를 통해 관리됨
+
+# 커스텀 룰
+custom-rules:
+  active: true
+  NamingRule:
+    active: true
+  StructureRule:
+    active: true
+  EnumSafetyRule:
+    active: true
+  TryCatchForbiddenRule:
+    active: true
+
+
+build:
+  maxIssues: 0
+

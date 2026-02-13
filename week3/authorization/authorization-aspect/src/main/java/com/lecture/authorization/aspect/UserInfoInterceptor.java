@@ -21,46 +21,45 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class UserInfoInterceptor implements HandlerInterceptor {
-    
+
+    private static final String BEARER_PREFIX = "Bearer ";
     private final UserGroupMappingService userGroupMappingService;
     private final AuthRepository authRepository;
-    
+
     @Override
     public boolean preHandle(
-        HttpServletRequest request,
-        HttpServletResponse response,
-        Object handler)
-    {
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handler) {
         Long userId = extractUserIdFromBearerToken(request)
-            .orElseGet(() -> extractUserIdFromHeader(request)
-                .orElseThrow(() -> new IllegalStateException(
-                    "User ID not found. Please provide either 'Authorization: Bearer <token>' header or 'X-User-Id' header."
-                )));
-        
+                .orElseGet(() -> extractUserIdFromHeader(request)
+                        .orElseThrow(() -> new IllegalStateException(
+                                "User ID not found. Please provide either 'Authorization: Bearer <token>' header or 'X-User-Id' header.")));
+
         // UserGroupMapping에서 groupId 조회
         Long groupId = userGroupMappingService.findByUserId(userId)
-            .map(mapping -> mapping.getGroupId())
-            .orElse(null);
-        
+                .map(mapping -> mapping.getGroupId())
+                .orElse(null);
+
         UserInfo userInfo = new UserInfo(userId, groupId);
         request.setAttribute(UserInfoArgumentResolver.USER_INFO_ATTRIBUTE_NAME, userInfo);
-        
+
         return true;
     }
-    
+
     /**
      * Authorization 헤더에서 Bearer 토큰을 추출하고 검증하여 userId를 반환합니다.
      */
     private Optional<Long> extractUserIdFromBearerToken(HttpServletRequest request) {
         String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+        if (authorizationHeader == null || !authorizationHeader.startsWith(BEARER_PREFIX)) {
             return Optional.empty();
         }
-        
-        String token = authorizationHeader.substring(7); // "Bearer " 제거
+
+        String token = authorizationHeader.substring(BEARER_PREFIX.length());
         return authRepository.findUserIdByToken(token);
     }
-    
+
     /**
      * X-User-Id 헤더에서 userId를 추출합니다 (테스트용).
      */
