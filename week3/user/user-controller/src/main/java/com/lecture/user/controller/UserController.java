@@ -25,32 +25,36 @@ import org.springframework.web.bind.annotation.RestController;
  * 4. Orchestrator를 통해 비즈니스 로직 처리
  * 
  * @CheckUserPermission Annotation이 붙은 메서드는
- * Aspect에 의해 자동으로 소유권 검증이 수행됩니다.
+ *                      Aspect에 의해 자동으로 소유권 검증이 수행됩니다.
  */
 @RestController
 @RequiredArgsConstructor
 public class UserController implements UserApi {
-    
+
     private final UserOrchestrator userOrchestrator;
-    
+
     @Override
     @CheckUserPermission
     public UserResponse getUserById(@PermissionId Long id) {
         return userOrchestrator.getUserById(id);
     }
-    
+
     @Override
     public AuthUserResponse getUserByEmail(String email) {
         return userOrchestrator.getUserByEmail(email);
     }
-    
+
     @Override
     public UserResponse createUser(CreateUserRequest request) {
         return userOrchestrator.createUser(
-            request.getEmail(),
-            request.getName(),
-            request.getPassword(),
-            request.getPhoneNumber()
-        );
+                request.getEmail(),
+                request.getName(),
+                request.getPassword(),
+                request.getPhoneNumber());
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userOrchestrator.deleteUser(id);
     }
 }

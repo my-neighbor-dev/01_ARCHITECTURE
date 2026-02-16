@@ -17,28 +17,35 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    
+
     private final UserRepository userRepository;
-    
+
     /**
      * 유저 ID로 유저 정보 조회
      */
     public User getUserById(Long id) {
         return userRepository.findById(id);
     }
-    
+
     /**
      * 이메일로 유저 정보 조회
      */
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-    
+
     /**
      * 유저 생성 (테스트용)
      */
     public User createUser(String email, String name, String password, String phoneNumber) {
         User user = new User(null, email, name, password, phoneNumber);
         return userRepository.save(user);
+    }
+
+    /**
+     * 유저 삭제
+     */
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 }

@@ -27,53 +27,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Tag(name = "User", description = "유저 관련 API")
 @RequestMapping("/api/users")
 public interface UserApi {
-    
-    @Operation(
-        summary = "유저 정보 조회",
-        description = "유저 ID를 통해 유저 정보를 조회합니다. 자신의 정보만 조회 가능합니다.",
-        security = {
+
+    @Operation(summary = "유저 정보 조회", description = "유저 ID를 통해 유저 정보를 조회합니다. 자신의 정보만 조회 가능합니다.", security = {
             @SecurityRequirement(name = "bearerAuth"),
             @SecurityRequirement(name = "userIdHeader")
-        }
-    )
+    })
     @ApiResponses(value = {
-        @ApiResponse(
-            responseCode = "200",
-            description = "유저 정보 조회 성공",
-            content = @Content(schema = @Schema(implementation = UserResponse.class))
-        ),
-        @ApiResponse(
-            responseCode = "403",
-            description = "접근 권한 없음 (다른 사용자의 정보)"
-        )
+            @ApiResponse(responseCode = "200", description = "유저 정보 조회 성공", content = @Content(schema = @Schema(implementation = UserResponse.class))),
+            @ApiResponse(responseCode = "403", description = "접근 권한 없음 (다른 사용자의 정보)")
     })
     @GetMapping("/{id}")
     UserResponse getUserById(@PathVariable("id") Long id);
-    
-    @Operation(
-        summary = "유저 정보 조회 (이메일)",
-        description = "이메일을 통해 유저 정보를 조회합니다. (인증용 - password 포함)"
-    )
+
+    @Operation(summary = "유저 정보 조회 (이메일)", description = "이메일을 통해 유저 정보를 조회합니다. (인증용 - password 포함)")
     @GetMapping("/by-email/{email}")
     AuthUserResponse getUserByEmail(@PathVariable("email") String email);
-    
-    @Operation(
-        summary = "유저 생성 (테스트용)",
-        description = "테스트용 유저를 생성합니다."
-    )
+
+    @Operation(summary = "유저 생성 (테스트용)", description = "테스트용 유저를 생성합니다.")
     @ApiResponses(value = {
-        @ApiResponse(
-            responseCode = "200",
-            description = "유저 생성 성공",
-            content = @Content(schema = @Schema(implementation = UserResponse.class))
-        )
+            @ApiResponse(responseCode = "200", description = "유저 생성 성공", content = @Content(schema = @Schema(implementation = UserResponse.class)))
     })
     @PostMapping
     UserResponse createUser(
-        @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "유저 생성 요청",
-            required = true
-        )
-        @RequestBody CreateUserRequest request
-    );
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "유저 생성 요청", required = true) @RequestBody CreateUserRequest request);
+
+    @Operation(summary = "유저 삭제", description = "유저 ID를 통해 유저를 삭제합니다.")
+    @org.springframework.web.bind.annotation.DeleteMapping("/{id}")
+    void deleteUser(@PathVariable("id") Long id);
 }

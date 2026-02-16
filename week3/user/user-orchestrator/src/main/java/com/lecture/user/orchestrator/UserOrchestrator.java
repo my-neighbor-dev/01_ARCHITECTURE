@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserOrchestrator {
-    
+
     private final UserService userService;
 
     public UserResponse getUserById(Long id) {
@@ -36,10 +36,14 @@ public class UserOrchestrator {
         User user = userService.getUserByEmail(email);
         return toAuthUserResponse(user);
     }
-    
+
     public UserResponse createUser(String email, String name, String password, String phoneNumber) {
         User user = userService.createUser(email, name, password, phoneNumber);
         return toUserResponse(user);
+    }
+
+    public void deleteUser(Long id) {
+        userService.deleteUser(id);
     }
 
     private UserResponse toUserResponse(User user) {
@@ -48,17 +52,16 @@ public class UserOrchestrator {
         }
         return new UserResponse(user.getId(), user.getEmail(), user.getName());
     }
-    
+
     private AuthUserResponse toAuthUserResponse(User user) {
         if (user == null) {
             return null;
         }
         return new AuthUserResponse(
-            user.getId(),
-            user.getEmail(),
-            user.getName(),
-            user.getPassword(),
-            user.getPhoneNumber()
-        );
+                user.getId(),
+                user.getEmail(),
+                user.getName(),
+                user.getPassword(),
+                user.getPhoneNumber());
     }
 }

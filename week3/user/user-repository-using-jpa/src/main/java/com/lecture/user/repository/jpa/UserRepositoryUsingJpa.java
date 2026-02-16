@@ -13,52 +13,57 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class UserRepositoryUsingJpa implements UserRepository {
-    
+
     private final UserJpaRepository userJpaRepository;
-    
+
     @Override
     public User findById(Long id) {
         UserEntity entity = userJpaRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("User not found"));
-        
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
         return convertToUser(entity);
     }
-    
+
     @Override
     public User findByEmail(String email) {
         UserEntity entity = userJpaRepository.findByEmail(email);
         if (entity == null) {
             throw new RuntimeException("User not found");
         }
-        
+
         return convertToUser(entity);
     }
-    
+
     @Override
     public User save(User user) {
         UserEntity entity = convertToEntity(user);
         UserEntity savedEntity = userJpaRepository.save(entity);
         return convertToUser(savedEntity);
     }
-    
+
+    @Override
+    public void deleteById(Long id) {
+        userJpaRepository.deleteById(id);
+    }
+
     private UserEntity convertToEntity(User user) {
         // 생성자 사용 (setter 없이)
         return new UserEntity(
-            user.getId(),
-            user.getEmail(),
-            user.getName(),
-            user.getPassword(),
-            user.getPhoneNumber()
+                user.getId(),
+                user.getEmail(),
+                user.getName(),
+                user.getPassword(),
+                user.getPhoneNumber(),
+                false // deleted
         );
     }
-    
+
     private User convertToUser(UserEntity entity) {
         return new User(
-            entity.getId(),
-            entity.getEmail(),
-            entity.getName(),
-            entity.getPassword(),
-            entity.getPhoneNumber()
-        );
+                entity.getId(),
+                entity.getEmail(),
+                entity.getName(),
+                entity.getPassword(),
+                entity.getPhoneNumber());
     }
 }
